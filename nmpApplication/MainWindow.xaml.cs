@@ -11,7 +11,7 @@ namespace nmpApplication
     /// 
     public partial class MainWindow : MetroWindow
     {
-        const int SEARCH_WIDTH = 400;
+        const int SEARCH_WIDTH = 255;
         string url = "http://www.mnet.com/player/aod/";
 
         static MainWindow instance = null;
@@ -96,27 +96,23 @@ namespace nmpApplication
             trayIcon();
             this.Hide();
         }
-
-        private void titleSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            //todo : 투명도 조절
-        }
-
-        private void ToggleSwitch_IsCheckedChanged(object sender, EventArgs e)
-        {
-            //if ((bool)searchToggle.IsChecked)
-            //{
-            //    this.Width += SEARCH_WIDTH;
-            //}
-            //else
-            //{
-            //    this.Width -= SEARCH_WIDTH;
-            //}
-        }
-
+        
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
+            this.Width += SEARCH_WIDTH;
             yourMahAppFlyout.IsOpen ^= true;
+        }
+
+        private void yourMahAppFlyout_ClosingFinished(object sender, RoutedEventArgs e)
+        {
+            this.Width -= SEARCH_WIDTH;
+            MessageBox.Show("test2");
+        }
+
+
+        private void yourMahAppFlyout_Unloaded(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("test1");
         }
     }
 }

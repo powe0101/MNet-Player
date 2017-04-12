@@ -9,7 +9,9 @@
         BorderThickness="0" 
         GlowBrush="Black"
         WindowTitleBrush="#e50278"
-        Title="엠넷 플레이어" Height="730" Width="505" Closed="Window_Closed" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" ScrollViewer.VerticalScrollBarVisibility="Auto" AllowsTransparency="True" WindowStyle="None" ScrollViewer.HorizontalScrollBarVisibility="Hidden" >
+        Title="엠넷 플레이어" Height="730" Width="505" Closed="Window_Closed" ResizeMode="CanMinimize"
+                      WindowStartupLocation="CenterScreen" ScrollViewer.VerticalScrollBarVisibility="Auto"
+                      AllowsTransparency="True" WindowStyle="None" ScrollViewer.HorizontalScrollBarVisibility="Hidden" WindowButtonCommandsOverlayBehavior="HiddenTitleBar" RightWindowCommandsOverlayBehavior="HiddenTitleBar" LeftWindowCommandsOverlayBehavior="HiddenTitleBar" IconOverlayBehavior="HiddenTitleBar" ShowCloseButton="True" >
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
             <Button x:Name="btnSearch" Content="검색" Click="btnSearch_Click" Cursor="Hand"/>
@@ -20,12 +22,14 @@
     </Controls:MetroWindow.RightWindowCommands>
     <Controls:MetroWindow.Flyouts>
         <Controls:FlyoutsControl>
-            <Controls:Flyout x:Name="yourMahAppFlyout" Header="Flyout" Position="Right" Width="256" Height="Auto">
-                <TextBox Controls:TextBoxHelper.Watermark="This is a textbox" />
+            <Controls:Flyout x:Name="yourMahAppFlyout" Header="검색" Position="Right" Width="256" IsOpen="{Binding OpenFlyOut, Mode=TwoWay}" ClosingFinished="yourMahAppFlyout_ClosingFinished">
+                <TextBox Controls:TextBoxHelper.Watermark=""  />
             </Controls:Flyout>
         </Controls:FlyoutsControl>
     </Controls:MetroWindow.Flyouts>
-    <Grid ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Visibility="Visible">
-        <WebBrowser x:Name="mainBrowser" HorizontalAlignment="Left" Initialized="WebBrowser_Initialized" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden" MaxWidth="505" Width="505" Visibility="Visible"  />
+    <Grid x:Name="mainGrid" Panel.ZIndex="0">
+        <WebBrowser x:Name="mainBrowser" Initialized="WebBrowser_Initialized" 
+                ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden" 
+                MaxWidth="505" Width="505" Visibility="Visible" Panel.ZIndex="0" HorizontalAlignment="Left"  />
     </Grid>
 </Controls:MetroWindow>
