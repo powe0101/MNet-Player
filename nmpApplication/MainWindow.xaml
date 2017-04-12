@@ -9,16 +9,23 @@
         BorderThickness="0" 
         GlowBrush="Black"
         WindowTitleBrush="#e50278"
-        Title="엠넷 플레이어" Height="810" Width="505" Closed="Window_Closed" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" ScrollViewer.VerticalScrollBarVisibility="Auto" AllowsTransparency="True" WindowStyle="None" ScrollViewer.HorizontalScrollBarVisibility="Hidden" >
+        Title="엠넷 플레이어" Height="730" Width="505" Closed="Window_Closed" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" ScrollViewer.VerticalScrollBarVisibility="Auto" AllowsTransparency="True" WindowStyle="None" ScrollViewer.HorizontalScrollBarVisibility="Hidden" >
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
-            <Slider x:Name="titleSlider" Maximum="100" Width="100" Value="100" ValueChanged="titleSlider_ValueChanged" SmallChange="10" TickFrequency="10" LargeChange="10" />
-            <Button x:Name="btnSetting" Content="설정" Click="btnSetting_Click"/>
-            <Button x:Name="btnLogin" Content="로그인" Click="btnLogin_Click"/>
-            <Button x:Name="btnTray" Content="트레이" Click="btnTray_Click"/>
+            <Button x:Name="btnSearch" Content="검색" Click="btnSearch_Click" Cursor="Hand"/>
+            <Button x:Name="btnSetting" Content="설정" Click="btnSetting_Click" Cursor="Hand"/>
+            <Button x:Name="btnLogin" Content="로그인" Click="btnLogin_Click" Cursor="Hand"/>
+            <Button x:Name="btnTray" Content="트레이" Click="btnTray_Click" Cursor="Hand"/>
         </Controls:WindowCommands>
     </Controls:MetroWindow.RightWindowCommands>
-    <Grid ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
-        <WebBrowser x:Name="mainBrowser" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="2" Initialized="WebBrowser_Initialized" Focusable="True" Panel.ZIndex="1" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden"  />
+    <Controls:MetroWindow.Flyouts>
+        <Controls:FlyoutsControl>
+            <Controls:Flyout x:Name="yourMahAppFlyout" Header="Flyout" Position="Right" Width="256" Height="Auto">
+                <TextBox Controls:TextBoxHelper.Watermark="This is a textbox" />
+            </Controls:Flyout>
+        </Controls:FlyoutsControl>
+    </Controls:MetroWindow.Flyouts>
+    <Grid ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Visibility="Visible">
+        <WebBrowser x:Name="mainBrowser" HorizontalAlignment="Left" Initialized="WebBrowser_Initialized" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden" MaxWidth="505" Width="505" Visibility="Visible"  />
     </Grid>
 </Controls:MetroWindow>

@@ -11,11 +11,12 @@ namespace nmpApplication
     /// 
     public partial class MainWindow : MetroWindow
     {
+        const int SEARCH_WIDTH = 400;
+        string url = "http://www.mnet.com/player/aod/";
+
         static MainWindow instance = null;
         static readonly object padlock = new object();
-        string url = "http://www.mnet.com/player/aod/";
         System.Windows.Forms.NotifyIcon ni = new System.Windows.Forms.NotifyIcon();
-
         BrowserEmulator browserEmulator = new BrowserEmulator(BrowserEmulator.BrowserEmulationVersion.Version11);
 
         public static MainWindow Instance
@@ -75,7 +76,6 @@ namespace nmpApplication
         private void WebBrowser_Initialized(object sender, EventArgs e)
         {
             mainBrowser.Navigate(url);
-            
             //todo : 웹브라우저 이동
         }
 
@@ -100,6 +100,23 @@ namespace nmpApplication
         private void titleSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             //todo : 투명도 조절
+        }
+
+        private void ToggleSwitch_IsCheckedChanged(object sender, EventArgs e)
+        {
+            //if ((bool)searchToggle.IsChecked)
+            //{
+            //    this.Width += SEARCH_WIDTH;
+            //}
+            //else
+            //{
+            //    this.Width -= SEARCH_WIDTH;
+            //}
+        }
+
+        private void btnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            yourMahAppFlyout.IsOpen ^= true;
         }
     }
 }
