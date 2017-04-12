@@ -18,15 +18,14 @@ E:\New Project\nmpApplication\nmpApplication\obj\Release\nmpApplication.exe
 E:\New Project\nmpApplication\nmpApplication\obj\Release\nmpApplication.pdb
 E:\New Project\nmpApplication\nmpApplication\obj\Release\nmpApplication.csprojResolveAssemblyReference.cache
 E:\New Project\nmpApplication\MNet-Player\nmpApplication\bin\Release\nmpApplication.exe.config
-E:\New Project\nmpApplication\MNet-Player\nmpApplication\obj\Release\nmpApplication.exe
-E:\New Project\nmpApplication\MNet-Player\nmpApplication\obj\Release\nmpApplication.pdb
 E:\New Project\nmpApplication\MNet-Player\nmpApplication\bin\Release\nmpApplication.exe
 E:\New Project\nmpApplication\MNet-Player\nmpApplication\bin\Release\nmpApplication.pdb
 E:\New Project\nmpApplication\MNet-Player\nmpApplication\bin\Release\MahApps.Metro.dll
+E:\New Project\nmpApplication\MNet-Player\nmpApplication\bin\Release\Microsoft.DwayneNeed.dll
 E:\New Project\nmpApplication\MNet-Player\nmpApplication\bin\Release\System.Windows.Interactivity.dll
+E:\New Project\nmpApplication\MNet-Player\nmpApplication\bin\Release\Microsoft.DwayneNeed.Win32.dll
 E:\New Project\nmpApplication\MNet-Player\nmpApplication\bin\Release\MahApps.Metro.pdb
 E:\New Project\nmpApplication\MNet-Player\nmpApplication\bin\Release\MahApps.Metro.xml
-E:\New Project\nmpApplication\MNet-Player\nmpApplication\obj\Release\nmpApplication.csprojResolveAssemblyReference.cache
 E:\New Project\nmpApplication\MNet-Player\nmpApplication\obj\Release\MainWindow.g.cs
 E:\New Project\nmpApplication\MNet-Player\nmpApplication\obj\Release\App.g.cs
 E:\New Project\nmpApplication\MNet-Player\nmpApplication\obj\Release\nmpApplication_MarkupCompile.cache
@@ -36,3 +35,6 @@ E:\New Project\nmpApplication\MNet-Player\nmpApplication\obj\Release\MainWindow.
 E:\New Project\nmpApplication\MNet-Player\nmpApplication\obj\Release\nmpApplication.g.resources
 E:\New Project\nmpApplication\MNet-Player\nmpApplication\obj\Release\nmpApplication.Properties.Resources.resources
 E:\New Project\nmpApplication\MNet-Player\nmpApplication\obj\Release\nmpApplication.csproj.GenerateResource.Cache
+E:\New Project\nmpApplication\MNet-Player\nmpApplication\obj\Release\nmpApplication.exe
+E:\New Project\nmpApplication\MNet-Player\nmpApplication\obj\Release\nmpApplication.pdb
+E:\New Project\nmpApplication\MNet-Player\nmpApplication\obj\Release\nmpApplication.csprojResolveAssemblyReference.cache

@@ -11,13 +11,15 @@ namespace nmpApplication
     /// 
     public partial class MainWindow : MetroWindow
     {
-        const int SEARCH_WIDTH = 255;
-        string url = "http://www.mnet.com/player/aod/";
+        const int SEARCH_WIDTH = 0;
 
         static MainWindow instance = null;
         static readonly object padlock = new object();
-        System.Windows.Forms.NotifyIcon ni = new System.Windows.Forms.NotifyIcon();
+        static System.Windows.Forms.NotifyIcon ni = new System.Windows.Forms.NotifyIcon();
         BrowserEmulator browserEmulator = new BrowserEmulator(BrowserEmulator.BrowserEmulationVersion.Version11);
+
+        ControlBrowser controlBrowser;
+        ControlTray controlTray;
 
         public static MainWindow Instance
         {
@@ -41,10 +43,12 @@ namespace nmpApplication
         private MainWindow()
         {
             InitializeComponent();
+            controlBrowser = new ControlBrowser(mainBrowser);
+            controlTray = new ControlTray(ni);
+            TrayIcon();
         }
 
-
-        private void trayIcon()
+        private void TrayIcon()
         {
             ni.Icon = Properties.Resources.logo;
             ni.Visible = true;
@@ -55,13 +59,14 @@ namespace nmpApplication
                     this.WindowState = WindowState.Normal;
                     ni.Visible = false;
                 };
-            ni.BalloonTipShown += 
+
+            ni.Click +=
                 delegate (object sender, EventArgs e)
                 {
-                    ni.BalloonTipTitle = "test";
+                    //todo : 트레이 아이콘 재생
                 };
         }
-        
+
         protected override void OnStateChanged(EventArgs e)
         {
             base.OnStateChanged(e);
@@ -73,11 +78,6 @@ namespace nmpApplication
             ni.Visible = false;
         }
 
-        private void WebBrowser_Initialized(object sender, EventArgs e)
-        {
-            mainBrowser.Navigate(url);
-            //todo : 웹브라우저 이동
-        }
 
         private void btnSetting_Click(object sender, RoutedEventArgs e)
         {
@@ -93,26 +93,40 @@ namespace nmpApplication
 
         private void btnTray_Click(object sender, RoutedEventArgs e)
         {
-            trayIcon();
             this.Hide();
         }
         
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
             this.Width += SEARCH_WIDTH;
-            yourMahAppFlyout.IsOpen ^= true;
+            searchFlyout.IsOpen ^= true;
         }
 
         private void yourMahAppFlyout_ClosingFinished(object sender, RoutedEventArgs e)
         {
             this.Width -= SEARCH_WIDTH;
-            MessageBox.Show("test2");
         }
 
 
         private void yourMahAppFlyout_Unloaded(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("test1");
+        }
+
+        private void WebBrowser_Initialized(object sender, EventArgs e)
+        {
+            mainBrowser.Navigate(controlBrowser.url);
+            //todo : 웹브라우저 이동
+            mainBrowser.LoadCompleted += MainBrowser_LoadCompleted;
+        }
+
+        private void MainBrowser_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
+        {
+            var document = mainBrowser.Document as mshtml.HTMLDocument;
+            var inputs = document.getElementsByTagName("button");
+            foreach (mshtml.IHTMLElement element in inputs)
+            {
+                testList.Items.Add(element.innerText);
+            }
         }
     }
 }

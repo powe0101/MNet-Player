@@ -5,13 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:nmpApplication"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:interop="clr-namespace:Microsoft.DwayneNeed.Interop;assembly=Microsoft.DwayneNeed"
         mc:Ignorable="d"
         BorderThickness="0" 
         GlowBrush="Black"
         WindowTitleBrush="#e50278"
         Title="엠넷 플레이어" Height="730" Width="505" Closed="Window_Closed" ResizeMode="CanMinimize"
                       WindowStartupLocation="CenterScreen" ScrollViewer.VerticalScrollBarVisibility="Auto"
-                      AllowsTransparency="True" WindowStyle="None" ScrollViewer.HorizontalScrollBarVisibility="Hidden" WindowButtonCommandsOverlayBehavior="HiddenTitleBar" RightWindowCommandsOverlayBehavior="HiddenTitleBar" LeftWindowCommandsOverlayBehavior="HiddenTitleBar" IconOverlayBehavior="HiddenTitleBar" ShowCloseButton="True" >
+                      AllowsTransparency="True" WindowStyle="None" ScrollViewer.HorizontalScrollBarVisibility="Hidden" 
+                      WindowButtonCommandsOverlayBehavior="HiddenTitleBar" RightWindowCommandsOverlayBehavior="HiddenTitleBar"
+                      LeftWindowCommandsOverlayBehavior="HiddenTitleBar" IconOverlayBehavior="HiddenTitleBar" ShowCloseButton="True" >
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
             <Button x:Name="btnSearch" Content="검색" Click="btnSearch_Click" Cursor="Hand"/>
@@ -22,14 +25,23 @@
     </Controls:MetroWindow.RightWindowCommands>
     <Controls:MetroWindow.Flyouts>
         <Controls:FlyoutsControl>
-            <Controls:Flyout x:Name="yourMahAppFlyout" Header="검색" Position="Right" Width="256" IsOpen="{Binding OpenFlyOut, Mode=TwoWay}" ClosingFinished="yourMahAppFlyout_ClosingFinished">
-                <TextBox Controls:TextBoxHelper.Watermark=""  />
+            <Controls:Flyout x:Name="searchFlyout" Header="검색" Position="Right" Width="256" IsOpen="{Binding OpenFlyOut, Mode=TwoWay}" ClosingFinished="yourMahAppFlyout_ClosingFinished" Unloaded="yourMahAppFlyout_Unloaded">
+                <Grid>
+                    <TextBox Controls:TextBoxHelper.Watermark="검색할 음악을 입력하세요"  Height="50" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                    <ToggleButton VerticalAlignment="Top" HorizontalAlignment="Left" Content="검색" />
+                    <ListBox x:Name="testList"></ListBox>
+                </Grid>
             </Controls:Flyout>
         </Controls:FlyoutsControl>
     </Controls:MetroWindow.Flyouts>
     <Grid x:Name="mainGrid" Panel.ZIndex="0">
-        <WebBrowser x:Name="mainBrowser" Initialized="WebBrowser_Initialized" 
+        <interop:AirspaceDecorator AirspaceMode="Redirect"
+                           Background="White"
+                           IsInputRedirectionEnabled="True"
+                           IsOutputRedirectionEnabled="True">
+            <WebBrowser x:Name="mainBrowser" Initialized="WebBrowser_Initialized" 
                 ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden" 
-                MaxWidth="505" Width="505" Visibility="Visible" Panel.ZIndex="0" HorizontalAlignment="Left"  />
+                MaxWidth="505" Width="505" Visibility="Visible" Panel.ZIndex="0" HorizontalAlignment="Left" />
+        </interop:AirspaceDecorator>
     </Grid>
 </Controls:MetroWindow>
