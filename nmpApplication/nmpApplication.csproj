@@ -57,6 +57,9 @@
       <HintPath>..\packages\MahApps.Metro.1.4.3\lib\net45\MahApps.Metro.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.DwayneNeed">
+      <HintPath>C:\Users\uJohn\AppData\Local\Apps\2.0\A7LC5EN2.V5D\A9G38GQW.ZCR\demo..tion_0000000000000000_0001.0000_c608129e58673477\Microsoft.DwayneNeed.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -140,7 +143,9 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="Resources\logo.ico" />
   </ItemGroup>

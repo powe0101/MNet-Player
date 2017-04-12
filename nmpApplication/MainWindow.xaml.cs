@@ -11,7 +11,7 @@ namespace nmpApplication
     /// 
     public partial class MainWindow : MetroWindow
     {
-        const int SEARCH_WIDTH = 255;
+        const int SEARCH_WIDTH = 0;
         string url = "http://www.mnet.com/player/aod/";
 
         static MainWindow instance = null;
@@ -44,7 +44,7 @@ namespace nmpApplication
         }
 
 
-        private void trayIcon()
+        private void TrayIcon()
         {
             ni.Icon = Properties.Resources.logo;
             ni.Visible = true;
@@ -93,7 +93,7 @@ namespace nmpApplication
 
         private void btnTray_Click(object sender, RoutedEventArgs e)
         {
-            trayIcon();
+            TrayIcon();
             this.Hide();
         }
         
@@ -106,13 +106,11 @@ namespace nmpApplication
         private void yourMahAppFlyout_ClosingFinished(object sender, RoutedEventArgs e)
         {
             this.Width -= SEARCH_WIDTH;
-            MessageBox.Show("test2");
         }
 
 
         private void yourMahAppFlyout_Unloaded(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("test1");
         }
     }
 }
