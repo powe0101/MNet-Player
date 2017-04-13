@@ -17,9 +17,7 @@ namespace nmpApplication
         static readonly object padlock = new object();
         static System.Windows.Forms.NotifyIcon ni = new System.Windows.Forms.NotifyIcon();
         BrowserEmulator browserEmulator = new BrowserEmulator(BrowserEmulator.BrowserEmulationVersion.Version11);
-
-        ControlBrowser controlBrowser;
-        ControlTray controlTray;
+        string url = "http://www.mnet.com/player/aod/";
 
         public static MainWindow Instance
         {
@@ -43,8 +41,6 @@ namespace nmpApplication
         private MainWindow()
         {
             InitializeComponent();
-            controlBrowser = new ControlBrowser(mainBrowser);
-            controlTray = new ControlTray(ni);
             TrayIcon();
         }
 
@@ -114,7 +110,7 @@ namespace nmpApplication
 
         private void WebBrowser_Initialized(object sender, EventArgs e)
         {
-            mainBrowser.Navigate(controlBrowser.url);
+            mainBrowser.Navigate(url);
             //todo : 웹브라우저 이동
             mainBrowser.LoadCompleted += MainBrowser_LoadCompleted;
         }

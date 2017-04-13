@@ -101,8 +101,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="BrowserEmulator.cs" />
-    <Compile Include="ControlBrowser.cs" />
-    <Compile Include="ControlTray.cs" />
     <Compile Include="LoginProcess.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
