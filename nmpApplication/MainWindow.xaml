@@ -25,11 +25,21 @@
     </Controls:MetroWindow.RightWindowCommands>
     <Controls:MetroWindow.Flyouts>
         <Controls:FlyoutsControl>
-            <Controls:Flyout x:Name="searchFlyout" Header="검색" Position="Right" Width="256" IsOpen="{Binding OpenFlyOut, Mode=TwoWay}" ClosingFinished="yourMahAppFlyout_ClosingFinished" Unloaded="yourMahAppFlyout_Unloaded">
+            <Controls:Flyout x:Name="searchFlyout" Header="검색" Position="Right" Width="500" IsOpen="{Binding OpenFlyOut, Mode=TwoWay}" ClosingFinished="yourMahAppFlyout_ClosingFinished" Unloaded="yourMahAppFlyout_Unloaded">
                 <Grid>
-                    <TextBox Controls:TextBoxHelper.Watermark="검색할 음악을 입력하세요"  Height="50" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                    <ToggleButton VerticalAlignment="Top" HorizontalAlignment="Left" Content="검색" />
-                    <ListBox x:Name="testList"></ListBox>
+                    <TextBox Controls:TextBoxHelper.Watermark="Search" x:Name="searchTextBox" Height="100" FontSize="20" VerticalAlignment="Top" Margin="0,0,40,0"/>
+                    <ToggleButton HorizontalAlignment="Right" VerticalAlignment="Top"  Content="검색" Height="100" x:Name="songSearchBtn" Width="40" Click="songSearchBtn_Click"/>
+                    <!--<ListBox x:Name="testList" MouseDoubleClick="testList_MouseDoubleClick" Height="100"/>-->
+                    <ListView x:Name="testList">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="제목" Width="100" DisplayMemberBinding="{Binding Subject}"/>
+                                <GridViewColumn Header="가수명" Width="100" DisplayMemberBinding="{Binding Author}"/>
+                                <GridViewColumn Header="앨범명" Width="100" DisplayMemberBinding="{Binding Done}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <WebBrowser x:Name="searchBrowser" Width="0" Height="0"/>
                 </Grid>
             </Controls:Flyout>
         </Controls:FlyoutsControl>
@@ -41,7 +51,7 @@
                            IsOutputRedirectionEnabled="True">
             <WebBrowser x:Name="mainBrowser" Initialized="WebBrowser_Initialized" 
                 ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden" 
-                MaxWidth="505" Width="505" Visibility="Visible" Panel.ZIndex="0" HorizontalAlignment="Left" />
+                MaxWidth="505" Width="505" Visibility="Visible" Panel.ZIndex="0" HorizontalAlignment="Left" LoadCompleted="MainBrowser_LoadCompleted" />
         </interop:AirspaceDecorator>
     </Grid>
 </Controls:MetroWindow>

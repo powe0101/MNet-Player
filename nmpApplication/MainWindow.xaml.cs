@@ -11,56 +11,32 @@ namespace nmpApplication
     /// 
     public partial class MainWindow : MetroWindow
     {
-        const int SEARCH_WIDTH = 0;
+        const int SEARCH_WIDTH = 0; //Search Form Width
+        const string url = "http://www.mnet.com/player/aod/";
 
-        static MainWindow instance = null;
+        static MainWindow uniQueInstance = null; 
         static readonly object padlock = new object();
-        static System.Windows.Forms.NotifyIcon ni = new System.Windows.Forms.NotifyIcon();
-        BrowserEmulator browserEmulator = new BrowserEmulator(BrowserEmulator.BrowserEmulationVersion.Version11);
-        string url = "http://www.mnet.com/player/aod/";
+
+        Notification notification = null;
+        mshtml.IHTMLElementCollection elementTagList = null;
 
         public static MainWindow Instance
         {
             get
             {
                 lock (padlock)
-                    if (instance == null)
-                        instance = new MainWindow();
-                return instance;
+                    if (uniQueInstance == null)
+                        uniQueInstance = new MainWindow();
+                return uniQueInstance;
             }
             
             private set{;}
-        } // 인스턴스 생성용 게터/세터
-
-        //static MainWindow()
-        //{
-        //    Instance = new MainWindow();
-        //} 
-        //todo : Static 생성자 사용해야 하는가?
+        } // Singleton instance call by App
+     
 
         private MainWindow()
         {
             InitializeComponent();
-            TrayIcon();
-        }
-
-        private void TrayIcon()
-        {
-            ni.Icon = Properties.Resources.logo;
-            ni.Visible = true;
-            ni.DoubleClick +=
-                delegate (object sender, EventArgs args)
-                {
-                    this.Show();
-                    this.WindowState = WindowState.Normal;
-                    ni.Visible = false;
-                };
-
-            ni.Click +=
-                delegate (object sender, EventArgs e)
-                {
-                    //todo : 트레이 아이콘 재생
-                };
         }
 
         protected override void OnStateChanged(EventArgs e)
@@ -70,32 +46,50 @@ namespace nmpApplication
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            instance = null;
-            ni.Visible = false;
+            notification.Off();
+            uniQueInstance = null;
         }
 
 
         private void btnSetting_Click(object sender, RoutedEventArgs e)
         {
             //todo : 설정버튼
-            MessageBox.Show("설정 누름"); 
+            MessageBox.Show("설정 누름");
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             //todo : 로그인 버튼
-            MessageBox.Show("로그인 누름");
+            mainBrowser.Navigate("https://user.interest.me/common/login/login.html?siteCode=S20&returnURL=http://www.mnet.com/player/aod/#");
         }
+
+       
 
         private void btnTray_Click(object sender, RoutedEventArgs e)
         {
+            notification = new Notification(this);
+            notification.SettingNotify();
+            notification.On();
+            
             this.Hide();
         }
         
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
             this.Width += SEARCH_WIDTH;
+
+            testList.Items.Clear();
+            elementTagList = null;
+            var document = mainBrowser.Document as mshtml.HTMLDocument;
+            elementTagList = document.getElementsByTagName("span");
+
+            foreach (mshtml.IHTMLElement element in elementTagList)
+            {
+                testList.Items.Add(element.innerText);
+            }
+
             searchFlyout.IsOpen ^= true;
+            
         }
 
         private void yourMahAppFlyout_ClosingFinished(object sender, RoutedEventArgs e)
@@ -117,12 +111,52 @@ namespace nmpApplication
 
         private void MainBrowser_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
         {
+            ((System.Windows.Controls.WebBrowser)sender).InvokeScript("eval", "$(document).contextmenu(function() {    return false;        });");
+            DeleteBrowserElementByClassName("a","btnLogin");
+        }
+
+        private void DeleteBrowserElementByClassName(string _tagName, string _className)
+        {
             var document = mainBrowser.Document as mshtml.HTMLDocument;
-            var inputs = document.getElementsByTagName("button");
-            foreach (mshtml.IHTMLElement element in inputs)
+            var tagList = document.getElementsByTagName(_tagName);
+            foreach (mshtml.IHTMLElement element in tagList)
+            {
+                if (element.className == _className)
+                {
+                    element.outerHTML = "";
+                }
+            }
+        }
+
+        private void testList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            MessageBox.Show(testList.SelectedIndex.ToString());
+            mshtml.IHTMLElement trayClickElement = elementTagList.item(testList.SelectedIndex);
+            trayClickElement.click();
+        }
+
+        private void songSearchBtn_Click(object sender, RoutedEventArgs e)
+        {
+            testList.Items.Clear();
+            elementTagList = null;
+            string searchText = searchTextBox.Text;
+
+            
+            searchBrowser.Navigate("http://search.mnet.com/search/song.asp?q="+searchText);
+            var document = searchBrowser.Document as mshtml.HTMLDocument;
+            elementTagList = document.getElementsByTagName("span");
+
+            foreach (mshtml.IHTMLElement element in elementTagList)
             {
                 testList.Items.Add(element.innerText);
             }
         }
+
     }
 }
+
+
+//https://user.interest.me/common/login/login.html?siteCode=S20&returnURL=http://www.mnet.com/player/aod/#
+
+
+//http://search.api.mnet.com/search/song?q=%EB%8F%84%EA%B9%A8%EB%B9%84&domainCd=0&sort=r&pageNum=1&callback=angular.callbacks._0
