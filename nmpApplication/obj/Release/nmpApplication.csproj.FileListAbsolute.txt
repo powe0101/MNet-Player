@@ -38,3 +38,6 @@ E:\New Project\nmpApplication\MNet-Player\nmpApplication\obj\Release\nmpApplicat
 E:\New Project\nmpApplication\MNet-Player\nmpApplication\obj\Release\nmpApplication.exe
 E:\New Project\nmpApplication\MNet-Player\nmpApplication\obj\Release\nmpApplication.pdb
 E:\New Project\nmpApplication\MNet-Player\nmpApplication\obj\Release\nmpApplication.csprojResolveAssemblyReference.cache
+D:\github\MNet-Player\nmpApplication\bin\Release\nmpApplication.exe.config
+D:\github\MNet-Player\nmpApplication\obj\Release\nmpApplication.exe
+D:\github\MNet-Player\nmpApplication\obj\Release\nmpApplication.pdb
