@@ -7,6 +7,9 @@ namespace nmpApplication
 {
     internal class BrowserEmulator
     {
+        //BrowserEmulator browserEmulator = new BrowserEmulator(BrowserEmulator.BrowserEmulationVersion.Version11);
+        //For MainBorwser start URL at Use mainWindow cs
+
         public enum BrowserEmulationVersion
         {
 
