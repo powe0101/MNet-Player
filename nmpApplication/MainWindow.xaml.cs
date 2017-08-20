@@ -3,6 +3,9 @@ using System.Windows;
 using MahApps.Metro.Controls;
 using System.Windows.Media.Imaging;
 
+//https://user.interest.me/common/login/login.html?siteCode=S20&returnURL=http://www.mnet.com/player/aod/#
+//http://search.api.mnet.com/search/song?q=%EB%8F%84%EA%B9%A8%EB%B9%84&domainCd=0&sort=r&pageNum=1&callback=angular.callbacks._0
+
 namespace nmpApplication
 {
     /// <summary>
@@ -20,25 +23,25 @@ namespace nmpApplication
         Notification notification = null;
         mshtml.IHTMLElementCollection elementTagList = null;
 
-        public static MainWindow Instance
-        {
-            get
-            {
-                lock (padlock)
-                    if (uniQueInstance == null)
-                        uniQueInstance = new MainWindow();
-                return uniQueInstance;
-            }
-            
-            private set{;}
-        } // Singleton instance call by App
-     
-
         private MainWindow()
         {
             InitializeComponent();
         }
 
+        public static MainWindow Instance
+        {
+            get
+            {
+                if(uniQueInstance == null) 
+                    lock (padlock)
+                        if (uniQueInstance == null)
+                            uniQueInstance = new MainWindow();
+                    return uniQueInstance;
+            }
+            
+            private set{;}
+        } // Singleton instance call by App
+     
         protected override void OnStateChanged(EventArgs e)
         {
             base.OnStateChanged(e);
@@ -46,7 +49,8 @@ namespace nmpApplication
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            notification.Off();
+            if(notification != null)
+                notification.Off();
             uniQueInstance = null;
         }
 
@@ -54,7 +58,6 @@ namespace nmpApplication
         private void btnSetting_Click(object sender, RoutedEventArgs e)
         {
             //todo : 설정버튼
-            MessageBox.Show("설정 누름");
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
@@ -63,40 +66,27 @@ namespace nmpApplication
             mainBrowser.Navigate("https://user.interest.me/common/login/login.html?siteCode=S20&returnURL=http://www.mnet.com/player/aod/#");
         }
 
-       
-
         private void btnTray_Click(object sender, RoutedEventArgs e)
         {
-            notification = new Notification(this);
-            notification.SettingNotify();
+            if (notification == null)
+                notification = new Notification();
+
             notification.On();
-            
+            notification.SetSetting();
+
             this.Hide();
         }
         
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
             this.Width += SEARCH_WIDTH;
-
-            testList.Items.Clear();
-            elementTagList = null;
-            var document = mainBrowser.Document as mshtml.HTMLDocument;
-            elementTagList = document.getElementsByTagName("span");
-
-            foreach (mshtml.IHTMLElement element in elementTagList)
-            {
-                testList.Items.Add(element.innerText);
-            }
-
             searchFlyout.IsOpen ^= true;
-            
         }
 
         private void yourMahAppFlyout_ClosingFinished(object sender, RoutedEventArgs e)
         {
             this.Width -= SEARCH_WIDTH;
         }
-
 
         private void yourMahAppFlyout_Unloaded(object sender, RoutedEventArgs e)
         {
@@ -105,27 +95,13 @@ namespace nmpApplication
         private void WebBrowser_Initialized(object sender, EventArgs e)
         {
             mainBrowser.Navigate(url);
-            //todo : 웹브라우저 이동
             mainBrowser.LoadCompleted += MainBrowser_LoadCompleted;
         }
 
         private void MainBrowser_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
         {
-            ((System.Windows.Controls.WebBrowser)sender).InvokeScript("eval", "$(document).contextmenu(function() {    return false;        });");
-            DeleteBrowserElementByClassName("a","btnLogin");
-        }
-
-        private void DeleteBrowserElementByClassName(string _tagName, string _className)
-        {
-            var document = mainBrowser.Document as mshtml.HTMLDocument;
-            var tagList = document.getElementsByTagName(_tagName);
-            foreach (mshtml.IHTMLElement element in tagList)
-            {
-                if (element.className == _className)
-                {
-                    element.outerHTML = "";
-                }
-            }
+            (sender as System.Windows.Controls.WebBrowser).InvokeScript("eval", "$(document).contextmenu(function() {    return false;        });");
+            Element.DeleteBrowserElementByClassName("A", "btnLogin", "로그인", sender as System.Windows.Controls.WebBrowser);
         }
 
         private void testList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -135,28 +111,12 @@ namespace nmpApplication
             trayClickElement.click();
         }
 
-        private void songSearchBtn_Click(object sender, RoutedEventArgs e)
+        private void SongSearchBtn_Click(object sender, RoutedEventArgs e)
         {
             testList.Items.Clear();
             elementTagList = null;
             string searchText = searchTextBox.Text;
-
-            
-            searchBrowser.Navigate("http://search.mnet.com/search/song.asp?q="+searchText);
-            var document = searchBrowser.Document as mshtml.HTMLDocument;
-            elementTagList = document.getElementsByTagName("span");
-
-            foreach (mshtml.IHTMLElement element in elementTagList)
-            {
-                testList.Items.Add(element.innerText);
-            }
         }
 
     }
 }
-
-
-//https://user.interest.me/common/login/login.html?siteCode=S20&returnURL=http://www.mnet.com/player/aod/#
-
-
-//http://search.api.mnet.com/search/song?q=%EB%8F%84%EA%B9%A8%EB%B9%84&domainCd=0&sort=r&pageNum=1&callback=angular.callbacks._0

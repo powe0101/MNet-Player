@@ -17,3 +17,24 @@ E:\New Project\nmpApplication\nmpApplication\obj\Debug\nmpApplication.csproj.Gen
 E:\New Project\nmpApplication\nmpApplication\obj\Debug\nmpApplication.exe
 E:\New Project\nmpApplication\nmpApplication\obj\Debug\nmpApplication.pdb
 E:\New Project\nmpApplication\nmpApplication\obj\Debug\nmpApplication.csprojResolveAssemblyReference.cache
+D:\github\MNet-Player\nmpApplication\bin\Debug\nmpApplication.exe.config
+D:\github\MNet-Player\nmpApplication\bin\Debug\nmpApplication.exe
+D:\github\MNet-Player\nmpApplication\bin\Debug\nmpApplication.pdb
+D:\github\MNet-Player\nmpApplication\bin\Debug\MahApps.Metro.dll
+D:\github\MNet-Player\nmpApplication\bin\Debug\Microsoft.DwayneNeed.dll
+D:\github\MNet-Player\nmpApplication\bin\Debug\System.Windows.Interactivity.dll
+D:\github\MNet-Player\nmpApplication\bin\Debug\Microsoft.DwayneNeed.Win32.dll
+D:\github\MNet-Player\nmpApplication\bin\Debug\MahApps.Metro.pdb
+D:\github\MNet-Player\nmpApplication\bin\Debug\MahApps.Metro.xml
+D:\github\MNet-Player\nmpApplication\obj\Debug\nmpApplication.csprojResolveAssemblyReference.cache
+D:\github\MNet-Player\nmpApplication\obj\Debug\MainWindow.g.cs
+D:\github\MNet-Player\nmpApplication\obj\Debug\App.g.cs
+D:\github\MNet-Player\nmpApplication\obj\Debug\nmpApplication_MarkupCompile.cache
+D:\github\MNet-Player\nmpApplication\obj\Debug\nmpApplication_MarkupCompile.lref
+D:\github\MNet-Player\nmpApplication\obj\Debug\App.baml
+D:\github\MNet-Player\nmpApplication\obj\Debug\MainWindow.baml
+D:\github\MNet-Player\nmpApplication\obj\Debug\nmpApplication.g.resources
+D:\github\MNet-Player\nmpApplication\obj\Debug\nmpApplication.Properties.Resources.resources
+D:\github\MNet-Player\nmpApplication\obj\Debug\nmpApplication.csproj.GenerateResource.Cache
+D:\github\MNet-Player\nmpApplication\obj\Debug\nmpApplication.exe
+D:\github\MNet-Player\nmpApplication\obj\Debug\nmpApplication.pdb

@@ -9,25 +9,19 @@ namespace nmpApplication
     class Notification
     {
         System.Windows.Forms.NotifyIcon ni = null;
-        MainWindow Window = null;
-
-        public Notification(MainWindow mainWindow)
-        {
-            this.Window = mainWindow;
-        }
+        MainWindow Window = MainWindow.Instance;
 
         public void On()
-        { ni.Visible = true; }
-        public void Off() { ni.Visible = false; if(ni != null) ni = null; }
+        { if(ni == null) RegisterNotificationIcon(); ni.Visible = true; }
+        public void Off() { ni.Visible = false; if (ni != null) Release(); }
 
-        public void SettingNotify()
+        private void Release()
         {
-            if(ni == null)
-                ni = new System.Windows.Forms.NotifyIcon();
+            ni = null;
+        }
 
-            ni.Icon = Properties.Resources.logo;
-            ni.Text = "엠넷 플레이어 0.5";
-
+        public void SetSetting()
+        {
             ni.DoubleClick +=
                 delegate (object sender, EventArgs args)
                 {
@@ -41,6 +35,13 @@ namespace nmpApplication
                 {
                     //todo : 트레이 아이콘 재생
                 };
+        }
+
+        private void RegisterNotificationIcon()
+        {
+            ni = new System.Windows.Forms.NotifyIcon();
+            ni.Icon = Properties.Resources.logo;
+            ni.Text = "엠넷 플레이어 0.5";
         }
     }
 }
