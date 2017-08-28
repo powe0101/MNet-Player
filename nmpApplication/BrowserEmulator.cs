@@ -321,6 +321,5 @@ namespace nmpApplication
             return GetBrowserEmulationVersion() != BrowserEmulationVersion.Default;
 
         }
-
     }
 }

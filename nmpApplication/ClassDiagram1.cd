@@ -9,13 +9,6 @@
   </Class>
   <Class Name="nmpApplication.BrowserEmulator" Collapsed="true">
     <Position X="5.25" Y="0.5" Width="1.5" />
-    <NestedTypes>
-      <Enum Name="nmpApplication.BrowserEmulator.BrowserEmulationVersion" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>BrowserEmulator.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Enum>
-    </NestedTypes>
     <TypeIdentifier>
       <HashCode>AAAIgAAAAAAAAAAAAAgAAAAAAAAAAgAgAAAAAAEAAAA=</HashCode>
       <FileName>BrowserEmulator.cs</FileName>
@@ -31,14 +24,14 @@
   <Class Name="nmpApplication.LoginProcess">
     <Position X="8" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAIAAAgCAAAIAAAAAAAgA=</HashCode>
+      <HashCode>AAACAAAAAAAAAAAABgAAAAAAIAAAgDAAAIAAAAAAAgA=</HashCode>
       <FileName>LoginProcess.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="nmpApplication.MainWindow" BaseTypeListCollapsed="true">
     <Position X="2.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>CAAAACAABAAAAgCAAAAAgAJAkAAICAChQAQAAAAgAAA=</HashCode>
+      <HashCode>CAAAACAABAAAAgCAQAAAgAJAkAAICAChQAQEAAAgAAA=</HashCode>
       <FileName>MainWindow.xaml.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -49,7 +42,7 @@
   <Class Name="nmpApplication.Notification">
     <Position X="5.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ABAAAIAAAACAAAAAAAAAAAAAAAAAAAAAAAAACABAAIA=</HashCode>
+      <HashCode>ABAAAIAAAACAAAAAAAACAAAAAAAAAAAAAAAEABAAAIA=</HashCode>
       <FileName>Notification.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -64,6 +57,10 @@
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
+  </Class>
+  <Class Name="MahApps.Metro.Controls.MetroWindow" Collapsed="true">
+    <Position X="10.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier />
   </Class>
   <Font Name="맑은 고딕" Size="9" />
 </ClassDiagram>

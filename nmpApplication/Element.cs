@@ -9,7 +9,7 @@ namespace nmpApplication
     static class Element
     {
         static bool isInit = false;
-
+        
         static public void DeleteBrowserElementByClassName(string _tagName, string _className,string _innerText, System.Windows.Controls.WebBrowser _browser)
         {
             var document = _browser.Document as mshtml.HTMLDocument;
@@ -21,5 +21,6 @@ namespace nmpApplication
                     element.outerHTML = "";
             }
         }
+
     }
 }
