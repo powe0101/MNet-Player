@@ -17,15 +17,14 @@ namespace nmpApplication
     public partial class MainWindow : MetroWindow
     {
         const int SEARCH_WIDTH = 0; //Search Form Width
-        const string url = "http://www.mnet.com/player/aod/";
+        const string mainUrl = "http://www.mnet.com/player/aod/";
         const string loginUrl = "https://user.interest.me/common/login/login.html?siteCode=S20&returnURL=http://www.mnet.com/player/aod/#";
 
         static MainWindow uniQueInstance = null; 
         static readonly object padlock = new object();
 
         Notification notification = null;
-        LoginProcess lp = null;
-        mshtml.IHTMLElementCollection elementTagList = null;
+        Login lp = null;
 
         private MainWindow()
         {
@@ -64,22 +63,19 @@ namespace nmpApplication
             //todo : 설정버튼
         }
 
+        // 로그인 버튼 클릭시 웹 브라우저 숨기고 로그인 다이얼로그 표시
         async private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.Instance.mainBrowser.Visibility = System.Windows.Visibility.Hidden;
-            LoginDialogData result = await this.ShowLoginAsync("로그인", "아이디와 비밀번호를 입력해주세요.", new LoginDialogSettings { ColorScheme = this.MetroDialogOptions.ColorScheme, InitialUsername = "" });
+            LoginDialogData result = await this.ShowLoginAsync("로그인", "아이디와 비밀번호를 입력해주세요.", new LoginDialogSettings { ColorScheme = this.MetroDialogOptions.ColorScheme, InitialUsername = "", RememberCheckBoxVisibility = Visibility.Visible, UsernameWatermark = "아이디" , PasswordWatermark = "비밀번호"});
             
-            if (result == null)
-            {
-                MainWindow.Instance.mainBrowser.Visibility = System.Windows.Visibility.Visible;
-                return;
-            }
+            if (result == null){ MainWindow.Instance.mainBrowser.Visibility = System.Windows.Visibility.Visible;return;}
 
-            lp = new LoginProcess();
-            lp.Data(result);
+            if(lp == null) lp = new Login();
+            lp.InjectionResult(result);
             
             mainBrowser.Navigate(loginUrl);
-            //todo : 로그인 버튼
+            
           
         }
 
@@ -111,7 +107,7 @@ namespace nmpApplication
 
         private void WebBrowser_Initialized(object sender, EventArgs e)
         {
-            mainBrowser.Navigate(url);
+            mainBrowser.Navigate(mainUrl);
             mainBrowser.LoadCompleted += MainBrowser_LoadCompleted;
         }
 
@@ -119,15 +115,17 @@ namespace nmpApplication
         {
             var document = mainBrowser.Document as mshtml.HTMLDocument;
 
-            if(document.url == url)
+            if (document.url == mainUrl)
                 MainWindow.Instance.mainBrowser.Visibility = System.Windows.Visibility.Visible;
-            else if (document.url == loginUrl && lp != null)
-                lp.Process(document);
             //로그인에 대한 정보가 생성되었을 경우.
-            
+            else if (document.url == loginUrl && lp != null)
+            {
+                btnLogin.Content = "로그아웃";
+                lp.Process(document);
+            }
+           
             (sender as System.Windows.Controls.WebBrowser).InvokeScript("eval", "$(document).contextmenu(function() {    return false;        });");
             Element.DeleteBrowserElementByClassName("A", "btnLogin", "로그인", sender as System.Windows.Controls.WebBrowser);
-
         }
 
         private void testList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)

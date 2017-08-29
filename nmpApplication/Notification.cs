@@ -10,8 +10,8 @@ namespace nmpApplication
     {
         System.Windows.Forms.NotifyIcon ni = null;
 
-        public void On()  { if(ni == null) RegisterNotificationIcon(); ni.Visible = true; }
-        public void Off() { ni.Visible = false; if (ni != null) Release(); }
+        public void On()  { if (ni == null) RegisterNotificationIcon(); ni.Visible = true; }
+        public void Off() { if (ni == null) return; ni.Visible = false;  Release(); }
 
         private void Release(){ ni = null; }
 

@@ -18,7 +18,9 @@ namespace nmpApplication
             foreach (mshtml.IHTMLElement element in tagList)
             {
                 if (element.className == _className && element.tagName == _tagName && element.innerText == _innerText)
+                {
                     element.outerHTML = "";
+                }
             }
         }
 
